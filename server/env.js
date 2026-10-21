@@ -1,0 +1,6 @@
+// Loads .env from the project root before other modules read process.env.
+try {
+  process.loadEnvFile(new URL('../.env', import.meta.url));
+} catch {
+  // No .env file; rely on the real environment.
+}
