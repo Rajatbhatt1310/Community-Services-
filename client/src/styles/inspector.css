@@ -1,0 +1,67 @@
+/* The homepage exercise, staged as a phone with annotations */
+.stage { display: grid; gap: clamp(32px, 5vw, 72px); align-items: center; color: var(--on-dark); }
+@media (min-width: 900px) { .stage { grid-template-columns: minmax(300px, 380px) 1fr; } }
+
+.stage-device { justify-self: center; width: 100%; max-width: 380px; }
+.device {
+  border-radius: 44px; padding: 12px; background: #05080f;
+  box-shadow: var(--lift), inset 0 0 0 1.5px #283550;
+}
+.device-status {
+  display: flex; align-items: center; justify-content: space-between; padding: 10px 22px 6px;
+  font-size: 0.78rem; font-weight: 700; color: var(--on-dark);
+}
+.device-notch { width: 96px; height: 26px; border-radius: 999px; background: #000; }
+.device-head {
+  display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4);
+  border-bottom: 1px solid rgb(255 255 255 / 0.08); font-size: var(--fs-small); line-height: 1.2;
+}
+.device-head small { display: block; color: var(--on-dark-2); font-size: var(--fs-tiny); }
+.device-avatar { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--midnight-3); font-size: var(--fs-tiny); font-weight: 800; }
+.device-screen { min-height: 330px; padding: var(--s4); border-radius: 0 0 32px 32px; display: flex; flex-direction: column; }
+.device-time { text-align: center; font-size: var(--fs-tiny); color: var(--on-dark-2); margin-bottom: var(--s4); }
+.sms-bubble {
+  max-width: 94%; padding: 12px 14px; border-radius: 18px 18px 18px 6px;
+  background: #e9eaef; color: #111318;
+  font-size: 1rem; line-height: 1.85;
+}
+.stage-note { margin-top: var(--s4); text-align: center; font-size: var(--fs-tiny); color: var(--on-dark-2); }
+
+.seg {
+  cursor: pointer; border-radius: 3px; padding: 2px 0;
+  box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  transition: background var(--t-fast) var(--ease);
+}
+.seg:hover { background: #d5d9e3; }
+.seg:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.seg.is-flagged { background: #f6d6cf; color: #7c1d12; font-weight: 700; }
+.seg.is-clear { background: #dfe3ea; }
+.seg-n {
+  display: inline-grid; place-items: center; width: 1.3em; height: 1.3em; margin-right: 3px; border-radius: 50%;
+  background: #a3322a; color: #fff; font-size: 0.7em; font-weight: 800; vertical-align: 0.15em;
+}
+
+.stage-title { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); letter-spacing: -0.03em; }
+.stage-help { margin-top: var(--s2); color: var(--on-dark-2); }
+.notes { list-style: none; margin-top: var(--s5); border-top: 1px solid var(--midnight-line); }
+.notes li { display: grid; grid-template-columns: auto 1fr; gap: var(--s4); align-items: baseline; padding: var(--s3) 0; border-bottom: 1px solid var(--midnight-line); }
+.note-n {
+  display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+  border: 1.5px solid var(--midnight-line); font-size: var(--fs-tiny); font-weight: 800; color: var(--on-dark-2);
+}
+.notes li.is-on .note-n { background: #a3322a; border-color: #a3322a; color: #fff; }
+.note-body { font-size: var(--fs-small); color: var(--on-dark); line-height: 1.5; }
+.note-body strong { color: #fff; }
+.note-hidden { color: var(--on-dark-2); }
+@media (prefers-reduced-motion: no-preference) {
+  .notes li.is-on .note-body { animation: note-in 360ms var(--ease); }
+}
+@keyframes note-in { from { opacity: 0; transform: translateX(-6px); } }
+.stage-status { margin-top: var(--s4); min-height: 1.6em; font-size: var(--fs-small); color: var(--on-dark-2); }
+.stage-status a { color: var(--signal); }
+.stage-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); margin-top: var(--s4); }
+.stage-count { font-size: var(--fs-small); color: var(--on-dark-2); }
+.stage-count strong { font-size: 1.5rem; color: #fff; margin-right: 2px; }
+.stage.is-done .stage-count strong { color: #9fd8b4; }
+.stage .btn-ghost { --btn-fg: var(--on-dark); --btn-border: var(--midnight-line); }
+.stage .btn-ghost:hover { --btn-border: var(--on-dark); color: var(--on-dark); }
