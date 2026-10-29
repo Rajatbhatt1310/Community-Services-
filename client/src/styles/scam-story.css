@@ -1,0 +1,68 @@
+/* "How a scam works" sticky scroll story */
+.story-grid { display: grid; gap: var(--s7); }
+.story-phone-wrap { display: none; }
+.story-steps { list-style: none; display: grid; gap: var(--s5); }
+
+.story-step { padding: var(--s6) 0; border-top: 1px solid var(--line); transition: opacity var(--t-base) var(--ease); }
+.step-label { display: flex; align-items: center; gap: var(--s3); font-weight: 800; font-size: var(--fs-small); color: var(--ink-2); }
+.step-num {
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid var(--ink); color: var(--ink); font-weight: 800; font-size: var(--fs-tiny);
+}
+.story-step.is-active .step-num { background: var(--ink); color: var(--paper); }
+.story-step h3 { margin-top: var(--s4); font-size: clamp(1.35rem, 1.1rem + 1vw, 1.9rem); font-weight: 800; letter-spacing: -0.025em; }
+.step-text { margin-top: var(--s3); color: var(--ink-2); max-width: 54ch; }
+.step-msg {
+  margin-top: var(--s4); padding: var(--s4); border-radius: 4px 14px 14px 14px;
+  background: var(--midnight); color: var(--on-dark); font-size: var(--fs-small);
+}
+.step-tell { margin-top: var(--s4); font-weight: 700; color: var(--ink); }
+.story-defence { padding: var(--s7) var(--s6); border-radius: var(--r-lg); background: var(--midnight); color: var(--on-dark); border-top: 0; }
+.story-defence h3 { color: var(--on-dark); margin-top: 0; }
+.story-defence .step-text { color: var(--on-dark-2); }
+.story-defence .btn-row { margin-top: var(--s5); }
+.defence-words { margin-top: var(--s4); font-size: clamp(2rem, 1.4rem + 2.6vw, 3.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
+
+/* Desktop: pinned phone, steps scroll past it */
+@media (min-width: 960px) {
+  .story-grid { grid-template-columns: minmax(300px, 0.85fr) 1.15fr; gap: var(--s9); align-items: start; }
+  .story-phone-wrap { display: block; position: sticky; top: calc(var(--nav-h) + 40px); }
+  .story-steps { gap: 0; padding-block: 6vh 0; }
+  .story-step { min-height: 46vh; display: flex; flex-direction: column; justify-content: center; opacity: 0.35; }
+  .story-step.is-active { opacity: 1; }
+  .story-step .step-msg { display: none; }
+  .story-defence { min-height: auto; opacity: 1; margin-top: var(--s7); }
+}
+
+.story-phone {
+  width: 100%; max-width: 340px; margin-inline: auto;
+  border-radius: 32px; padding: 12px; background: var(--ink);
+}
+.phone-top {
+  display: flex; align-items: center; gap: var(--s3); padding: var(--s4); border-radius: 22px 22px 0 0;
+  background: var(--midnight-2); color: var(--on-dark); font-size: var(--fs-small); line-height: 1.25;
+}
+.phone-top small { display: block; color: var(--on-dark-2); font-size: var(--fs-tiny); }
+.phone-avatar { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--midnight-3); color: var(--on-dark); font-weight: 800; font-size: var(--fs-tiny); }
+.phone-chat {
+  display: flex; flex-direction: column; gap: var(--s3); min-height: 420px; padding: var(--s4);
+  background: var(--midnight); justify-content: flex-end;
+}
+.bubble {
+  position: relative; max-width: 88%; padding: 10px 14px; border-radius: 4px 14px 14px 14px;
+  background: var(--midnight-3); color: var(--on-dark); font-size: 0.875rem; line-height: 1.45;
+  opacity: 0; transform: translateY(12px); max-height: 0; overflow: hidden; padding-block: 0;
+  transition: opacity 400ms var(--ease), transform 400ms var(--ease), max-height 400ms var(--ease), padding 400ms var(--ease);
+}
+.bubble.is-in { opacity: 0.5; transform: none; max-height: 220px; padding-block: 10px; overflow: visible; }
+.bubble.is-current { opacity: 1; outline: 1.5px solid var(--signal); }
+.bubble-tag {
+  position: absolute; right: -4px; top: -11px; padding: 1px 8px; border-radius: var(--r-sm);
+  background: var(--signal); color: var(--midnight); font-size: 0.7rem; font-weight: 800;
+}
+.phone-meter {
+  display: grid; grid-template-columns: auto 1fr; gap: var(--s3); align-items: center;
+  padding: var(--s4); border-radius: 0 0 22px 22px; background: var(--midnight-2); color: var(--on-dark-2); font-size: var(--fs-tiny); font-weight: 700;
+}
+.meter-bar { height: 6px; border-radius: 3px; background: var(--midnight-3); overflow: hidden; }
+.meter-bar span { display: block; height: 100%; background: #e2836f; transition: width 500ms var(--ease); }
