@@ -1,0 +1,43 @@
+/* "Get help" wizard on the Report page */
+.wizard {
+  position: relative; margin-bottom: var(--s8); padding: clamp(24px, 4vw, 48px); border-radius: var(--r-lg);
+  color: var(--on-dark); background: var(--midnight);
+}
+.wizard-kicker { font-size: var(--fs-small); font-weight: 700; color: var(--on-dark-2); margin-bottom: var(--s3); }
+.wizard h2 { color: #fff; font-size: clamp(1.5rem, 1.15rem + 1.5vw, 2.25rem); max-width: 28ch; outline: none; }
+.wizard-step { display: grid; gap: var(--s5); justify-items: start; }
+@media (prefers-reduced-motion: no-preference) {
+  .wizard-step { animation: wizard-in 380ms var(--ease); }
+}
+@keyframes wizard-in { from { opacity: 0; transform: translateX(16px); } }
+.wizard-choices { display: grid; gap: var(--s3); width: 100%; }
+@media (min-width: 720px) { .wizard-choices { grid-template-columns: 1fr 1fr; } .wizard-choices:not(.two) { grid-template-columns: repeat(3, 1fr); } }
+.wizard-choice {
+  min-height: 64px; padding: var(--s4) var(--s5); border-radius: var(--r-lg); text-align: left;
+  background: rgb(255 255 255 / 0.05); border: 1.5px solid var(--midnight-line); color: #fff; font-weight: 700;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
+}
+.wizard-choice:hover { border-color: var(--signal); }
+.wizard-choice.is-urgent { border-color: #e2836f; }
+.wizard-call {
+  display: inline-flex; align-items: center; gap: var(--s3); padding: var(--s4) var(--s5); border-radius: var(--r-lg);
+  font-weight: 800; font-size: 1.125rem; text-decoration: none;
+}
+.wizard a.wizard-call.is-urgent { background: #f2b6a8; color: #3a0d06; }
+.wizard-call:hover { text-decoration: none; background: #f6c9be; }
+.wizard-call svg { width: 26px; height: 26px; }
+.wizard-alert { display: flex; gap: var(--s3); align-items: center; padding: var(--s3) var(--s4); border-radius: var(--r-md); border: 1px solid #e2836f; color: #f6c9be; font-weight: 700; }
+.wizard-alert svg { color: #f2b6a8; }
+.wizard-note { color: var(--on-dark-2); font-size: var(--fs-small); }
+.wizard-progress { font-size: var(--fs-small); font-weight: 700; color: var(--signal); }
+.wizard-plan { list-style: none; display: grid; gap: var(--s2); width: 100%; }
+.wizard-plan label {
+  display: grid; grid-template-columns: auto auto 1fr; gap: var(--s3); align-items: start; cursor: pointer;
+  padding: var(--s4); border-radius: var(--r-md); background: rgb(255 255 255 / 0.04); border: 1px solid var(--midnight-line);
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.wizard-plan input { width: 20px; height: 20px; margin-top: 2px; accent-color: #6fbf8e; }
+.wizard-num { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--midnight-3); font-size: var(--fs-tiny); font-weight: 800; }
+.wizard-plan .is-done label { border-color: #6fbf8e; }
+.wizard-plan .is-done span:last-child { color: var(--on-dark-2); text-decoration: line-through; text-decoration-color: rgb(255 255 255 / 0.4); }
+.wizard .link-button { color: var(--signal); }
