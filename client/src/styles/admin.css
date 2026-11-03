@@ -1,0 +1,83 @@
+/* Admin area */
+.admin-gap { margin-top: var(--s5); }
+.section-admin { padding-block: var(--s7) var(--section); }
+.admin-bar { background: var(--mist); border-bottom: 1px solid var(--line); }
+.admin-bar-inner { display: flex; flex-wrap: wrap; gap: var(--s3) var(--s5); align-items: center; justify-content: space-between; padding-block: var(--s3); font-size: var(--fs-small); }
+.admin-bar nav { display: flex; gap: var(--s5); align-items: center; }
+.admin-bar nav a { font-weight: 700; }
+.admin-head { display: flex; flex-wrap: wrap; gap: var(--s4); align-items: center; justify-content: space-between; margin-bottom: var(--s6); }
+.admin-head h1 { font-size: var(--fs-h2); }
+.admin-section { margin-top: var(--s8); }
+.admin-section h2 { font-size: var(--fs-h3); margin-bottom: var(--s4); }
+.link-button.danger { color: var(--bad); }
+
+.admin-login { max-width: calc(30rem + 2 * var(--gutter)); }
+.admin-login .lead { margin-block: var(--s4) var(--s6); }
+.admin-form { display: grid; gap: var(--s3); }
+.admin-form label, .ed-field label { font-weight: 700; font-size: var(--fs-small); }
+.admin-form input, .ed-field input, .ed-field textarea, .ed-field select, .ed-option input:not([type='radio']) {
+  width: 100%; min-height: 44px; padding: 10px 12px; border: 1.5px solid var(--line-strong); border-radius: var(--r-sm);
+  background: var(--paper-raised); line-height: 1.5;
+}
+.admin-form input:focus, .ed-field :is(input, textarea, select):focus, .ed-option input:focus { outline: 3px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+.admin-form input[aria-invalid='true'] { border-color: var(--bad); }
+.field-error { color: var(--bad); font-weight: 600; font-size: var(--fs-small); }
+.admin-form .btn { justify-self: start; margin-top: var(--s3); }
+
+.kpis { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper-raised); }
+.kpis div { padding: var(--s5); }
+.kpis div + div { border-left: 1px solid var(--line); }
+.kpis dt { font-size: var(--fs-small); color: var(--ink-2); font-weight: 600; }
+.kpis dd { margin: 4px 0 0; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+
+.admin-table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: var(--fs-small); }
+.admin-table th, .admin-table td { text-align: left; padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); vertical-align: middle; }
+.admin-table thead th { background: var(--stone); font-weight: 700; }
+.admin-table tbody th { font-weight: 600; }
+.admin-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.admin-table .actions { text-align: right; }
+.admin-table .actions a { font-weight: 700; }
+.meter { display: grid; grid-template-columns: minmax(80px, 1fr) 3.5rem; gap: var(--s3); align-items: center; }
+.meter-track { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.meter-fill { display: block; height: 100%; background: var(--accent); border-radius: 0 4px 4px 0; }
+.meter-value { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+
+.day-bars { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; height: 160px; align-items: end; padding: var(--s4); border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--paper-raised); }
+.day { display: grid; grid-template-rows: auto 1fr auto; height: 100%; align-items: end; justify-items: center; gap: 4px; }
+.day-bar { width: 100%; max-width: 28px; min-height: 2px; background: var(--accent); border-radius: 4px 4px 0 0; align-self: end; }
+.day-count { font-size: var(--fs-tiny); font-weight: 700; font-variant-numeric: tabular-nums; }
+.day-label { font-size: var(--fs-tiny); color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+.hard-list { list-style: none; display: grid; border-top: 1px solid var(--line); }
+.hard-list li { display: grid; gap: 2px; padding-block: var(--s4); border-bottom: 1px solid var(--line); }
+.hard-rate { font-size: var(--fs-small); color: var(--ink-2); }
+.hard-rate strong { color: var(--ink); font-size: 1.0625rem; }
+.hard-prompt { font-weight: 600; }
+
+/* Editor */
+.editor { max-width: calc(54rem + 2 * var(--gutter)); }
+.editor .crumb { font-size: var(--fs-small); color: var(--ink-2); margin-bottom: var(--s4); }
+.editor-errors { margin-bottom: var(--s6); }
+.editor-errors ul { margin: var(--s2) 0 0 var(--s5); }
+.ed-group { border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s5) var(--s6) var(--s6); margin: 0 0 var(--s6); background: var(--paper-raised); min-width: 0; display: grid; gap: var(--s4); }
+.ed-group > legend { font-weight: 800; font-size: 1.0625rem; padding: 0 var(--s2); margin-left: calc(-1 * var(--s2)); }
+.ed-hint { font-size: var(--fs-tiny); color: var(--ink-2); }
+.ed-grid { display: grid; gap: var(--s4); }
+@media (min-width: 700px) { .ed-grid { grid-template-columns: 1fr 1fr; } }
+.ed-field { display: grid; gap: 6px; min-width: 0; }
+.ed-field textarea { resize: vertical; }
+.ed-pair, .ed-question { display: grid; gap: var(--s3); padding: var(--s4) 0; border-top: 1px solid var(--line); }
+.ed-row-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s3); }
+.ed-row-head h3 { font-size: var(--fs-small); }
+.ed-row-tools { display: flex; gap: var(--s4); }
+.ed-options { border: 0; padding: 0; margin: 0; display: grid; gap: var(--s2); min-width: 0; }
+.ed-options legend { font-weight: 700; font-size: var(--fs-small); margin-bottom: 6px; }
+.ed-option { display: grid; grid-template-columns: 24px 1fr auto; gap: var(--s3); align-items: center; }
+.ed-option input[type='radio'] { width: 20px; height: 20px; accent-color: var(--good); }
+.ed-correct { font-size: var(--fs-tiny); font-weight: 800; color: var(--good); }
+.ed-checks { display: grid; gap: var(--s2); }
+@media (min-width: 700px) { .ed-checks { grid-template-columns: 1fr 1fr; } }
+.ed-check { display: flex; gap: var(--s3); align-items: flex-start; font-size: var(--fs-small); }
+.ed-check input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); }
+.editor-actions { display: flex; flex-wrap: wrap; gap: var(--s4); align-items: center; position: sticky; bottom: 0; padding: var(--s4) 0; background: var(--paper); border-top: 1px solid var(--line); }
+.save-status { font-weight: 700; color: var(--good); font-size: var(--fs-small); flex: 1; }
