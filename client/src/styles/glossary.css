@@ -1,0 +1,31 @@
+/* Glossary */
+.section-tight { padding-block: clamp(40px, 6vw, 72px) var(--section); }
+.gl-tools {
+  position: sticky; top: var(--nav-h); z-index: 5; display: grid; gap: var(--s3);
+  padding-block: var(--s4); margin-bottom: var(--s6); background: var(--paper); border-bottom: 1px solid var(--line);
+}
+.gl-tools input {
+  width: 100%; max-width: 480px; min-height: 48px; padding: 10px 14px; border-radius: var(--r-md);
+  border: 1.5px solid var(--line-strong); background: var(--paper-raised); font-size: 1.05rem;
+}
+.gl-tools input:focus { outline: 3px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+.gl-letters { display: flex; flex-wrap: wrap; gap: 2px; }
+.gl-letters a {
+  display: grid; place-items: center; min-width: 34px; height: 34px; border-radius: var(--r-sm);
+  font-weight: 700; font-size: var(--fs-small); color: var(--ink); text-decoration: none;
+}
+.gl-letters a:hover { background: var(--stone); }
+.gl-letters a[aria-disabled='true'] { color: var(--ink-3); opacity: 0.45; pointer-events: none; }
+.gl-group { display: grid; gap: var(--s4); padding-block: var(--s6); border-top: 1px solid var(--line); scroll-margin-top: calc(var(--nav-h) + 140px); }
+.gl-letter { font-size: clamp(2.5rem, 1.6rem + 3vw, 4rem); font-weight: 300; letter-spacing: -0.04em; line-height: 1; color: var(--ink-3); }
+@media (min-width: 860px) { .gl-group { grid-template-columns: 8rem 1fr; } }
+.gl-list { margin: 0; display: grid; gap: var(--s5); }
+.gl-item { display: grid; gap: var(--s2); scroll-margin-top: calc(var(--nav-h) + 140px); }
+.gl-item:target dt { background: #f5e3a3; }
+.gl-item dt { font-weight: 800; font-size: 1.2rem; letter-spacing: -0.015em; justify-self: start; padding: 0 2px; border-radius: 2px; }
+.gl-item dd { margin: 0; display: grid; gap: var(--s2); max-width: 64ch; }
+.gl-item dd p { color: var(--ink-2); }
+.gl-more { font-size: var(--fs-small); font-weight: 700; text-decoration: none; }
+.gl-more:hover { text-decoration: underline; }
+@media (min-width: 860px) { .gl-item { grid-template-columns: 16rem 1fr; gap: var(--s6); } }
+.gl-empty { padding-block: var(--s6); color: var(--ink-2); }
