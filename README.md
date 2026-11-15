@@ -24,11 +24,22 @@ A cybersecurity awareness website for school students in Classes 9 to 12, built 
 | Part | Choice |
 | --- | --- |
 | Frontend | React 18, React Router 7, Vite 6, plain CSS with design tokens |
-| Backend | Node.js 20+ and Express 4 |
-| Storage | JSON file (`server/data/db.json`), created from `shared/content` on first start |
-| Shared | `shared/content` (lessons, quizzes, tips) and `shared/validate.js`, used by both sides |
+| Backend (production) | Cloudflare Pages Functions (`functions/api/[[path]].js`) with Cloudflare D1 |
+| Backend (local) | Node.js 20+ and Express 4 (`server/`) with a JSON file store |
+| Shared | `shared/content` (lessons, quizzes, tips) and `shared/validate.js`, used by both backends |
 
-MongoDB is not used yet. The data needs (ten chapters plus anonymous quiz totals) fit in a single JSON file, and all storage goes through `server/store.js`, so a MongoDB version of that file can replace it later without touching the rest of the app.
+Both backends serve the same API. `npm run test:functions` checks the Cloudflare one against a real SQLite database.
+
+## Deploy to Cloudflare Pages
+
+1. In the Cloudflare dashboard, open **Workers & Pages**, create a **Pages** project and connect this GitHub repository.
+2. Build settings: framework preset **None**, build command `npm run build`, output directory `dist`.
+3. Create a D1 database (**Storage & Databases → D1**), for example `cybersafe`.
+4. In the Pages project, **Settings → Bindings**, add a **D1 database** binding with the variable name `DB`.
+5. In **Settings → Variables and Secrets**, add two secrets: `ADMIN_PASSWORD` (12+ characters) and `SESSION_SECRET` (32+ random characters).
+6. Redeploy. The tables and the ten chapters are created automatically on the first API request.
+
+Every push to `main` deploys again. No R2 bucket or separate Worker is needed.
 
 ## Setup
 

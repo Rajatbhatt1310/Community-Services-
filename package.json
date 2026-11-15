@@ -10,7 +10,8 @@
     "dev:server": "node --watch server/index.js",
     "build": "vite build",
     "start": "node server/index.js",
-    "check:content": "node scripts/check-content.mjs"
+    "check:content": "node scripts/check-content.mjs",
+    "test:functions": "node --disable-warning=ExperimentalWarning scripts/test-functions.mjs"
   },
   "engines": {
     "node": ">=20"

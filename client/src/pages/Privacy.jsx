@@ -22,7 +22,7 @@ export default function Privacy() {
         <h2>What is sent to the server</h2>
         <p>When you finish a quiz, the website sends an anonymous result to the project server: which chapter the quiz was for, which questions were answered correctly or incorrectly, and the time. It does not include your name, an account, or any identifier for your device. The project team uses these results only as totals and averages, for example to see which topics students find hardest.</p>
         <p>The server keeps the most recent 50,000 quiz results. A formal retention period is to be confirmed.</p>
-        <p>Like any web server, the computer hosting this site receives your IP address when you connect. The application does not save IP addresses to its data store. It keeps them briefly in memory to limit repeated requests. Logging by the hosting provider is to be confirmed once hosting is chosen.</p>
+        <p>Like any web server, the computer hosting this site receives your IP address when you connect. The application does not save IP addresses. To limit repeated requests, it keeps a one-way scrambled code made from the IP address (which cannot be turned back into the address) for up to one hour. The site is hosted on Cloudflare; Cloudflare’s own logging is covered by its privacy policy.</p>
 
         <h2>Third-party services</h2>
         <p>The site loads its font (Manrope) from Google Fonts. When it does, your browser connects to Google’s servers, which receive your IP address. No other third-party services, analytics, advertising or tracking cookies are used.</p>

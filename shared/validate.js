@@ -47,3 +47,34 @@ export function validateModule(m, { requireQuestions = true } = {}) {
   }
   return errors;
 }
+
+// Keep only known fields so arbitrary data cannot be stored through the admin API.
+export function cleanModule(m) {
+  const pair = (list, a, b) => (list || []).map((p) => ({ [a]: p[a].trim(), [b]: p[b].trim() }));
+  const text = (list) => (list || []).map((s) => s.trim());
+  return {
+    id: m.id,
+    number: m.number,
+    title: m.title.trim(),
+    summary: m.summary.trim(),
+    minutes: m.minutes,
+    group: m.group,
+    intro: m.intro.trim(),
+    objectives: text(m.objectives),
+    sections: pair(m.sections, 'heading', 'body'),
+    examples: pair(m.examples, 'title', 'text'),
+    warningSigns: text(m.warningSigns),
+    dos: text(m.dos),
+    donts: text(m.donts),
+    prevention: pair(m.prevention, 'title', 'text'),
+    takeaways: text(m.takeaways),
+    relatedTips: (m.relatedTips || []).filter((t) => typeof t === 'string' && SLUG.test(t)),
+    questions: (m.questions || []).map((q) => ({
+      id: q.id,
+      prompt: q.prompt.trim(),
+      options: q.options.map((o) => o.trim()),
+      answer: q.answer,
+      explanation: q.explanation.trim(),
+    })),
+  };
+}

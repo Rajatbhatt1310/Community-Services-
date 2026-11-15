@@ -6,7 +6,7 @@ import * as store from './store.js';
 import { adminEnabled, checkPassword, issueSession, clearSession, hasSession, requireAdmin } from './auth.js';
 import { rateLimit } from './rate-limit.js';
 import { computeStats } from './stats.js';
-import { validateModule, SLUG } from '../shared/validate.js';
+import { validateModule, cleanModule, SLUG } from '../shared/validate.js';
 
 const PORT = Number(process.env.PORT) || 4000;
 const DIST = fileURLToPath(new URL('../dist/', import.meta.url));
@@ -105,7 +105,7 @@ app.post('/api/admin/modules', requireAdmin, async (req, res) => {
   const errors = validateModule(mod, { requireQuestions: false });
   if (store.getModule(mod?.id)) errors.push('a module with this id already exists');
   if (errors.length) return res.status(400).json({ error: 'The module could not be saved.', details: errors });
-  res.status(201).json(await store.createModule(clean(mod)));
+  res.status(201).json(await store.createModule(cleanModule(mod)));
 });
 
 app.put('/api/admin/modules/:id', requireAdmin, async (req, res) => {
@@ -115,7 +115,7 @@ app.put('/api/admin/modules/:id', requireAdmin, async (req, res) => {
   const ids = (mod.questions || []).map((q) => q.id);
   if (ids.some((id) => typeof id !== 'string' || !id) || new Set(ids).size !== ids.length) errors.push('every question needs a unique id');
   if (errors.length) return res.status(400).json({ error: 'The module could not be saved.', details: errors });
-  res.json(await store.replaceModule(req.params.id, clean(mod)));
+  res.json(await store.replaceModule(req.params.id, cleanModule(mod)));
 });
 
 app.delete('/api/admin/modules/:id', requireAdmin, async (req, res) => {
@@ -124,37 +124,6 @@ app.delete('/api/admin/modules/:id', requireAdmin, async (req, res) => {
 });
 
 app.use('/api', (req, res) => res.status(404).json({ error: 'Not found.' }));
-
-// Keep only known fields so arbitrary data cannot be stored through the admin API.
-function clean(m) {
-  const pair = (list, a, b) => (list || []).map((p) => ({ [a]: p[a].trim(), [b]: p[b].trim() }));
-  const text = (list) => (list || []).map((s) => s.trim());
-  return {
-    id: m.id,
-    number: m.number,
-    title: m.title.trim(),
-    summary: m.summary.trim(),
-    minutes: m.minutes,
-    group: m.group,
-    intro: m.intro.trim(),
-    objectives: text(m.objectives),
-    sections: pair(m.sections, 'heading', 'body'),
-    examples: pair(m.examples, 'title', 'text'),
-    warningSigns: text(m.warningSigns),
-    dos: text(m.dos),
-    donts: text(m.donts),
-    prevention: pair(m.prevention, 'title', 'text'),
-    takeaways: text(m.takeaways),
-    relatedTips: (m.relatedTips || []).filter((t) => typeof t === 'string' && SLUG.test(t)),
-    questions: (m.questions || []).map((q) => ({
-      id: q.id,
-      prompt: q.prompt.trim(),
-      options: q.options.map((o) => o.trim()),
-      answer: q.answer,
-      explanation: q.explanation.trim(),
-    })),
-  };
-}
 
 /* Built frontend (production) */
 if (existsSync(DIST)) {
